@@ -80,7 +80,7 @@ class Bank:
         self.root.title("XYZ Bank")
         self.username = tk.StringVar()
         self.password = tk.StringVar()
-        self.amount = tk.IntVar()
+        self.amount = tk.StringVar()
 
     """  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX """
 
@@ -213,8 +213,11 @@ class Bank:
             else:
                 tmsg.showinfo("Debit", "You Do Not Have Sufficient Amount....Please Enter Less Amount.....")
 
+        except ValueError as e:
+            tmsg.showerror("Error", "ERROR-->>> Only Enter Numbers Not Alphabet And Do Not Leave It Blank...")
+
         except Exception as e:
-            tmsg.showerror("Error", "ERROR--->>> Please Enter Amount And then Press submit ")
+            tmsg.showerror("Error", e)
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
@@ -294,7 +297,7 @@ class Bank:
         self.login_frame.pack_forget()
 
         self.profile_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
-        self.profile_frame.pack(side="top", pady=150)
+        self.profile_frame.pack(side="top", pady=100)
 
         self.profile_label = tk.Label(self.profile_frame, text="***Your Profile Details***", bg='blue', font="times 30 bold")
         self.profile_label.grid(row=0, column=0, padx=10, columnspan=3)
@@ -302,29 +305,64 @@ class Bank:
         self.profile_label1 = tk.Label(self.profile_frame, text="Username: ", font="times 20 bold")
         self.profile_label1.grid(row=1, column=0, padx=10, pady=10)
 
+        self.profile_label11 = tk.Label(self.profile_frame, text=f"{data[0]} ", font="times 20 bold")
+        self.profile_label11.grid(row=1, column=1, padx=10, pady=10)
+
         self.profile_label2 = tk.Label(self.profile_frame, text="Name: ", font="times 20 bold")
         self.profile_label2.grid(row=2, column=0, padx=10, pady=10)
+
+        self.profile_label22 = tk.Label(self.profile_frame, text=f"{data[1]} ", font="times 20 bold")
+        self.profile_label22.grid(row=2, column=1, padx=10, pady=10)
 
         self.profile_label3 = tk.Label(self.profile_frame, text="Balance: ", font="times 20 bold")
         self.profile_label3.grid(row=3, column=0, padx=10, pady=10)
 
+        self.profile_label33 = tk.Label(self.profile_frame, text=f"Rs {data[3]} ", font="times 20 bold")
+        self.profile_label33.grid(row=3, column=1, padx=10, pady=10)
+
         self.profile_label4 = tk.Label(self.profile_frame, text="Account_Number: ", font="times 20 bold")
         self.profile_label4.grid(row=4, column=0, padx=10, pady=10)
+
+        self.profile_label44 = tk.Label(self.profile_frame, text=f"{data[4]} ", font="times 20 bold")
+        self.profile_label44.grid(row=4, column=1, padx=10, pady=10)
 
         self.profile_label5 = tk.Label(self.profile_frame, text="Email: ", font="times 20 bold")
         self.profile_label5.grid(row=5, column=0, padx=10, pady=10)
 
+        self.profile_label55 = tk.Label(self.profile_frame, text=f"{data[6]} ", font="times 20 bold")
+        self.profile_label55.grid(row=5, column=1, padx=10, pady=10)
+
         self.profile_label6 = tk.Label(self.profile_frame, text="Phone_Number: ", font="times 20 bold")
         self.profile_label6.grid(row=6, column=0, padx=10, pady=10)
 
+        self.profile_label66 = tk.Label(self.profile_frame, text=f"{data[7]} ", font="times 20 bold")
+        self.profile_label66.grid(row=6, column=1, padx=10, pady=10)
 
-    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+        self.profile_button1 = tk.Button(self.profile_frame, text='<<--Back', fg='blue', command=self.back_profile,
+                                        font="times 15 bold")
+        self.profile_button1.grid(row=7, column=0)
+
+        # One can use for loop here also.
+
+
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+    def back_profile(self):
+        self.profile_frame.pack_forget()
+
+        self.login()
+
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
 
 
     def logout(self):
         self.login_frame.pack_forget()
         self.menu()
+        self.username.set('')
+        self.password.set('')
 
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""

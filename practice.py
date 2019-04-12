@@ -1,16 +1,14 @@
 import tkinter as tk
 
 root = tk.Tk()
-b = tk.IntVar()
+b = tk.StringVar()
 def hello():
-    #print(a.get())
     try:
-        if b.get()!="":
-            print(int(b.get()))
-        else:
-            print("Enter amount")
-    except Exception as e:
-        print(e)
+        print(int(b.get()))
+
+    except ValueError:
+        print("hi")
+
 a = tk.Entry(root, textvariable=b).pack()
 bu= tk.Button(root, text='submit', command=hello).pack()
 
