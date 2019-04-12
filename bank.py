@@ -1,6 +1,6 @@
 # This is a bank application by Tkinter in class...
 
-"""                 ********************************************************************** """
+""" ************************************************************************************************************* """
 
 import json,time,os,sys         #importing useful libraries....
 from random import randint
@@ -9,7 +9,7 @@ import tkinter as tk
 import sqlite3 as sql
 import tkinter.messagebox as tmsg
 
-"""    **************************************************************************** """
+"""    ******************************************************************************************************************** """
 
 # creating functions for database
 # creating 3 global functions so that we can use them in functions like debit, credit etc.
@@ -67,7 +67,7 @@ def db_close():
     data = None
 
 
-"""*****************************************************************************"""
+"""********************************************************************************************************************"""
 
 
 class Bank:
@@ -285,12 +285,49 @@ class Bank:
         tmsg.showinfo("Balance", f"Your Account Balance is --->>>>  Rs {data[3]}")
 
 
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+
+
     def profile(self):
-        pass
+
+        self.login_frame.pack_forget()
+
+        self.profile_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+        self.profile_frame.pack(side="top", pady=150)
+
+        self.profile_label = tk.Label(self.profile_frame, text="***Your Profile Details***", bg='blue', font="times 30 bold")
+        self.profile_label.grid(row=0, column=0, padx=10, columnspan=3)
+
+        self.profile_label1 = tk.Label(self.profile_frame, text="Username: ", font="times 20 bold")
+        self.profile_label1.grid(row=1, column=0, padx=10, pady=10)
+
+        self.profile_label2 = tk.Label(self.profile_frame, text="Name: ", font="times 20 bold")
+        self.profile_label2.grid(row=2, column=0, padx=10, pady=10)
+
+        self.profile_label3 = tk.Label(self.profile_frame, text="Balance: ", font="times 20 bold")
+        self.profile_label3.grid(row=3, column=0, padx=10, pady=10)
+
+        self.profile_label4 = tk.Label(self.profile_frame, text="Account_Number: ", font="times 20 bold")
+        self.profile_label4.grid(row=4, column=0, padx=10, pady=10)
+
+        self.profile_label5 = tk.Label(self.profile_frame, text="Email: ", font="times 20 bold")
+        self.profile_label5.grid(row=5, column=0, padx=10, pady=10)
+
+        self.profile_label6 = tk.Label(self.profile_frame, text="Phone_Number: ", font="times 20 bold")
+        self.profile_label6.grid(row=6, column=0, padx=10, pady=10)
+
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+
 
     def logout(self):
         self.login_frame.pack_forget()
         self.menu()
+
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
 
 
@@ -303,7 +340,7 @@ class Bank:
 
 
 
-"""******************************************************************************************************"""
+"""***********************************************************************************************************************"""
 
 if __name__=="__main__":
     window = Bank()
