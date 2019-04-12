@@ -190,7 +190,7 @@ class Bank:
                                       font="times 15 bold")
         self.debit_button1.grid(row=3, column=2, pady=10, padx=10, columnspan=4)
 
-        self.debit_button2 = tk.Button(self.debit_frame, text='<<--Back', fg='blue', command=self.back_1,
+        self.debit_button2 = tk.Button(self.debit_frame, text='<<--Back', fg='blue', command=self.back_debit,
                                       font="times 15 bold")
         self.debit_button2.grid(row=3, column=0, pady=10, columnspan=1)
 
@@ -199,14 +199,13 @@ class Bank:
 
     def debit_submit(self):
         try:
-            print(int(self.amount.get()))
             extra_amount = int(self.amount.get())
             if data[3] > extra_amount:
                 new_amount = data[3] - extra_amount
                 cmd1 = f"update xyz set balance='{new_amount}' where username='{self.username.get()}' "
                 db_execute_insert(cmd1)
 
-                tmsg.showinfo("Debit", f"Amount Rs {new_amount} is Deposited Successfuly...")
+                tmsg.showinfo("Debit", f"Amount Rs {extra_amount} is Debitted From Your Account...")
 
                 self.debit_frame.pack_forget()
                 self.login()
@@ -219,7 +218,7 @@ class Bank:
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
-    def back_1(self):
+    def back_debit(self):
 
         self.debit_frame.pack_forget()
 
@@ -229,10 +228,62 @@ class Bank:
 
 
     def credit(self):
-        pass
+
+        self.login_frame.pack_forget()
+
+        self.credit_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+        self.credit_frame.pack(side="top", pady=150)
+
+        self.credit_label = tk.Label(self.credit_frame,
+                                    text=f"Welcome {data[1].title()} {data[2].title()} To The XYZ Bank", bg='red',
+                                    font="times 35 bold")
+        self.credit_label.grid(row=0, column=0, columnspan=3)
+
+        self.credit_label2 = tk.Label(self.credit_frame, text="Amount: ", font="times 20 bold")
+        self.credit_label2.grid(row=1, column=1, padx=10, pady=10)
+
+        self.credit_entry1 = tk.Entry(self.credit_frame, textvariable=self.amount)
+        self.credit_entry1.grid(row=1, column=2)
+
+        self.credit_button1 = tk.Button(self.credit_frame, text='Submit', fg='blue', command=self.credit_submit,
+                                       font="times 15 bold")
+        self.credit_button1.grid(row=3, column=2, pady=10, padx=10, columnspan=4)
+
+        self.credit_button2 = tk.Button(self.credit_frame, text='<<--Back', fg='blue', command=self.back_credit,
+                                       font="times 15 bold")
+        self.credit_button2.grid(row=3, column=0, pady=10, columnspan=1)
+
+        """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+    def credit_submit(self):
+
+        try:
+            extra_amount = int(self.amount.get())
+            new_amount = data[3] + extra_amount
+            cmd1 = f"update xyz set balance='{new_amount}' where username='{self.username.get()}' "
+            db_execute_insert(cmd1)
+
+            tmsg.showinfo("Credit", f"Amount Rs {extra_amount} is Deposited Successfuly...")
+
+            self.credit_frame.pack_forget()
+            self.login()
+
+        except Exception as e:
+            tmsg.showerror("Error", "ERROR--->>> Please Enter Amount And then Press submit ")
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+    def back_credit(self):
+        self.credit_frame.pack_forget()
+
+        self.login()
+
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx"""
 
     def check_balance(self):
-        pass
+        tmsg.showinfo("Balance", f"Your Account Balance is --->>>>  Rs {data[3]}")
+
 
     def profile(self):
         pass
