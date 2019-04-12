@@ -1,21 +1,18 @@
 import tkinter as tk
 
 root = tk.Tk()
-
-
-class A:
-    def __init__(self):
-        self.username = tk.StringVar()
-
-
-
-    def hi(self):
-        userentry = tk.Entry(root, textvariable=self.username).pack()
-        button1 = tk.Button(root, text='submit', command=self.hello).pack()
-    def hello(self):
-        print(self.username.get())
-a=A()
-a.hi()
+b = tk.IntVar()
+def hello():
+    #print(a.get())
+    try:
+        if b.get()!="":
+            print(int(b.get()))
+        else:
+            print("Enter amount")
+    except Exception as e:
+        print(e)
+a = tk.Entry(root, textvariable=b).pack()
+bu= tk.Button(root, text='submit', command=hello).pack()
 
 
 root.mainloop()
