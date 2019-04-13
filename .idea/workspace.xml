@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cd28084e-0694-4c16-9a58-0d5a48e2f2df" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/bank.py" beforeDir="false" afterPath="$PROJECT_DIR$/bank.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bank.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/bank.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice.py" beforeDir="false" afterPath="$PROJECT_DIR$/practice.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bank.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2891">
-              <caret line="780" column="95" selection-start-line="780" selection-start-column="95" selection-end-line="780" selection-end-column="95" />
+            <state relative-caret-position="-4573">
+              <caret line="618" column="65" lean-forward="true" selection-start-line="618" selection-start-column="65" selection-end-line="618" selection-end-column="65" />
               <folding>
                 <element signature="e#172#235#0" expanded="true" />
               </folding>
@@ -201,8 +199,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2891">
-          <caret line="780" column="95" selection-start-line="780" selection-start-column="95" selection-end-line="780" selection-end-column="95" />
+        <state relative-caret-position="-4573">
+          <caret line="618" column="65" lean-forward="true" selection-start-line="618" selection-start-column="65" selection-end-line="618" selection-end-column="65" />
           <folding>
             <element signature="e#172#235#0" expanded="true" />
           </folding>

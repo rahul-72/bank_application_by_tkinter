@@ -330,6 +330,7 @@ class Bank:
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
     def back_debit(self):
+        self.amount.set('')
 
         self.debit_frame.pack_forget()
 
@@ -392,6 +393,7 @@ class Bank:
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
     def back_credit(self):
+        self.amount.set('')
         self.credit_frame.pack_forget()
 
         self.login()
@@ -589,6 +591,9 @@ class Bank:
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx"""
 
     def setting_password_back(self):
+        self.old_password.set('')
+        self.new_password.set('')
+        self.verify_new_password.set('')
         self.setting_password_frame.pack_forget()
         self.setting_label_detail.pack_forget()
 
@@ -678,6 +683,8 @@ class Bank:
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
     def setting_name_back(self):
+        self.new_first_name.set('')
+        self.new_last_name.set('')
         self.setting_name_frame.pack_forget()
         self.setting_label_detail.pack_forget()
 
@@ -751,6 +758,7 @@ class Bank:
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
     def setting_email_back(self):
+        self.new_email.set('')
         self.setting_email_frame.pack_forget()
         self.setting_label_detail.pack_forget()
 
@@ -820,6 +828,7 @@ class Bank:
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
     def setting_phone_number_back(self):
+        self.new_phone_number.set('')
         self.setting_phone_number_frame.pack_forget()
         self.setting_label_detail.pack_forget()
 
@@ -874,6 +883,14 @@ class Bank:
 
     def signup(self):
         try:
+            self.username.set('')
+            self.password.set('')
+            self.first_name.set('')
+            self.last_name.set('')
+            self.email.set('')
+            self.phone_number.set('')
+            self.verify_password.set('')
+
 
             self.menu_frame.pack_forget()
 
@@ -928,6 +945,8 @@ class Bank:
         """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
     def signup_login(self):
+        self.username.set('')
+        self.password.set('')
         self.signup_frame.pack_forget()
         self.menu_label.pack_forget()
 
