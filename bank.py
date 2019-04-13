@@ -110,6 +110,8 @@ class Bank:
                                         font="times 25 bold")
             self.menu_label.pack(side='bottom', anchor='se')
 
+
+
             self.menu_label1 = tk.Label(self.menu_frame, text="**Welcome To The XYZ Bank**", bg='blue', font="times 35 bold")
             self.menu_label1.grid(row=0, column=0, padx=10, columnspan=3)
 
@@ -149,6 +151,7 @@ class Bank:
             if data:
                 if self.password.get() == data[5]:
                     self.menu_frame.pack_forget()
+
 
                     self.login_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
                     self.login_frame.pack(side="top", pady=150)
@@ -403,13 +406,16 @@ class Bank:
 
     def logout(self):
         self.login_frame.pack_forget()
-        self.menu()
+        self.menu_label.pack_forget()
+
         self.username.set('')
         self.password.set('')
         self.phone_number.set('')
         self.first_name.set('')
         self.last_name.set('')
         self.email.set('')
+
+        self.menu()
 
         db_close()
 
@@ -423,6 +429,10 @@ class Bank:
         try:
 
             self.login_frame.pack_forget()
+
+            self.setting_label_detail = tk.Label(self.root, text="Setting-->>>", bg='blue',
+                                              font="times 20 italic")
+            self.setting_label_detail.pack(side='top', pady=25)
 
 
             self.setting_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
@@ -504,6 +514,7 @@ class Bank:
 
     def setting_password_back(self):
         self.setting_password_frame.pack_forget()
+        self.setting_label_detail.pack_forget()
 
         self.setting()
 
@@ -526,6 +537,8 @@ class Bank:
                 self.old_password.set('')
                 self.new_password.set('')
                 self.verify_new_password.set('')
+
+                self.setting_label_detail.pack_forget()
                 self.menu()
 
             else:
@@ -573,6 +586,7 @@ class Bank:
 
     def setting_name_back(self):
         self.setting_name_frame.pack_forget()
+        self.setting_label_detail.pack_forget()
 
         self.setting()
 
@@ -594,6 +608,8 @@ class Bank:
 
         self.new_first_name.set('')
         self.new_last_name.set('')
+
+        self.setting_label_detail.pack_forget()
 
         self.setting()
 
@@ -629,6 +645,7 @@ class Bank:
 
     def setting_email_back(self):
         self.setting_email_frame.pack_forget()
+        self.setting_label_detail.pack_forget()
 
         self.setting()
 
@@ -645,6 +662,8 @@ class Bank:
         self.setting_email_frame.pack_forget()
 
         self.new_email.set('')
+
+        self.setting_label_detail.pack_forget()
 
         self.setting()
 
@@ -680,6 +699,7 @@ class Bank:
 
     def setting_phone_number_back(self):
         self.setting_phone_number_frame.pack_forget()
+        self.setting_label_detail.pack_forget()
 
         self.setting()
 
@@ -699,6 +719,7 @@ class Bank:
                               f'Message--->>> Your phone_number Is Updated Successfully...Your New phone_number Is -> {new_ph}.......')
 
                 self.setting_phone_number_frame.pack_forget()
+                self.setting_label_detail.pack_forget()
 
                 self.new_phone_number.set('')
 
@@ -716,6 +737,8 @@ class Bank:
 
     def setting_back(self):
         self.setting_frame.pack_forget()
+        self.setting_label_detail.pack_forget()
+        
         self.login()
 
 
