@@ -2,9 +2,12 @@ import tkinter as tk
 
 root = tk.Tk()
 b = tk.StringVar()
+
 def hello():
     try:
-        print(int(b.get()))
+        q = int(b.get())
+        print(q)
+        print(type(q))
 
     except ValueError:
         print("hi")

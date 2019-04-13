@@ -4,7 +4,6 @@
 
 import json,time,os,sys         #importing useful libraries....
 from random import randint
-from getpass import getpass
 import tkinter as tk
 import sqlite3 as sql
 import tkinter.messagebox as tmsg
@@ -49,6 +48,7 @@ def db_execute_fetch(cmd):
     """database ---->>>>> program"""
     global data
     cursor.execute(cmd)
+    db.commit()
     data = cursor.fetchone()
 
 
@@ -81,6 +81,20 @@ class Bank:
         self.username = tk.StringVar()
         self.password = tk.StringVar()
         self.amount = tk.StringVar()
+        self.first_name = tk.StringVar()
+        self.last_name = tk.StringVar()
+        self.verify_password = tk.StringVar()
+        self.email = tk.StringVar()
+        self.phone_number = tk.StringVar()
+
+
+        self.old_password = tk.StringVar()
+        self.new_password = tk.StringVar()
+        self.verify_new_password = tk.StringVar()
+        self.new_first_name = tk.StringVar()
+        self.new_last_name = tk.StringVar()
+
+
 
     """  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX """
 
@@ -90,7 +104,7 @@ class Bank:
             self.menu_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
             self.menu_frame.pack(side="top", pady=150)
 
-            self.menu_label1 = tk.Label(self.menu_frame, text="Welcome To The XYZ Bank", bg='blue', font="times 35 bold")
+            self.menu_label1 = tk.Label(self.menu_frame, text="**Welcome To The XYZ Bank**", bg='blue', font="times 35 bold")
             self.menu_label1.grid(row=0, column=0, padx=10, columnspan=3)
 
             self.menu_label2 = tk.Label(self.menu_frame, text="Username: ", font="times 20 bold")
@@ -157,6 +171,11 @@ class Bank:
                                                font="times 15 bold")
                 self.login_button5.grid(row=4, column=0, pady=10, columnspan=2)
 
+                self.login_button6 = tk.Button(self.login_frame, text='Setting', fg='blue', command=self.setting,
+                                               font="times 15 bold")
+                self.login_button6.grid(row=2, column=2, pady=10)
+
+
             else:
                 tmsg.showinfo("Login", "Incorrect Password  !!!!!!!!")
 
@@ -207,6 +226,7 @@ class Bank:
 
                 tmsg.showinfo("Debit", f"Amount Rs {extra_amount} is Debitted From Your Account...")
 
+                self.amount.set('')
                 self.debit_frame.pack_forget()
                 self.login()
 
@@ -268,6 +288,7 @@ class Bank:
 
             tmsg.showinfo("Credit", f"Amount Rs {extra_amount} is Deposited Successfuly...")
 
+            self.amount.set('')
             self.credit_frame.pack_forget()
             self.login()
 
@@ -311,7 +332,7 @@ class Bank:
         self.profile_label2 = tk.Label(self.profile_frame, text="Name: ", font="times 20 bold")
         self.profile_label2.grid(row=2, column=0, padx=10, pady=10)
 
-        self.profile_label22 = tk.Label(self.profile_frame, text=f"{data[1]} ", font="times 20 bold")
+        self.profile_label22 = tk.Label(self.profile_frame, text=f"{data[1].title()} {data[2].title()}", font="times 20 bold")
         self.profile_label22.grid(row=2, column=1, padx=10, pady=10)
 
         self.profile_label3 = tk.Label(self.profile_frame, text="Balance: ", font="times 20 bold")
@@ -363,6 +384,176 @@ class Bank:
         self.menu()
         self.username.set('')
         self.password.set('')
+        self.phone_number.set('')
+        self.first_name.set('')
+        self.last_name.set('')
+        self.email.set('')
+
+        db_close()
+
+
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+
+    def setting(self):
+
+        self.login_frame.pack_forget()
+
+
+        self.setting_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+        self.setting_frame.pack(side="top", pady=150)
+
+        self.setting_label = tk.Label(self.setting_frame,
+                                    text=f"**What Do You Want To Change**", bg='red',
+                                    font="times 30 bold")
+        self.setting_label.grid(row=0, column=0, columnspan=3)
+
+        self.setting_button1 = tk.Button(self.setting_frame, text='Password', fg='blue', command=self.setting_password,
+                                       font="times 15 bold")
+        self.setting_button1.grid(row=2, column=0, pady=10)
+
+        self.setting_button2 = tk.Button(self.setting_frame, text='Name', fg='blue', command=self.setting_name,
+                                       font="times 15 bold")
+        self.setting_button2.grid(row=2, column=1, pady=10)
+
+        self.setting_button3 = tk.Button(self.setting_frame, text='Email', fg='blue',
+                                       command=self.setting_email,
+                                       font="times 15 bold")
+        self.setting_button3.grid(row=3, column=0, pady=10)
+
+        self.setting_button4 = tk.Button(self.setting_frame, text='Phone Number', fg='blue', command=self.setting_phone_number,
+                                       font="times 15 bold")
+        self.setting_button4.grid(row=3, column=1, pady=10)
+
+        self.setting_button5 = tk.Button(self.setting_frame, text='Back', fg='blue',
+                                         command=self.setting_back,
+                                         font="times 15 bold")
+        self.setting_button5.grid(row=5, column=0, columnspan=2, pady=10)
+
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+    def setting_password(self):
+
+        self.setting_frame.pack_forget()
+
+        self.setting_password_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+        self.setting_password_frame.pack(side="top", pady=150)
+
+        self.setting_password_label1 = tk.Label(self.setting_password_frame, text=f"Old Password :--> ", font="times 20 bold")
+        self.setting_password_label1.grid(row=1, column=0, padx=10, pady=10)
+
+        self.setting_password_entry1 = tk.Entry(self.setting_password_frame, textvariable=self.old_password, show='*')
+        self.setting_password_entry1.grid(row=1, column=1)
+
+        self.setting_password_label2 = tk.Label(self.setting_password_frame, text=f"New Password :--> ",
+                                                font="times 20 bold")
+        self.setting_password_label2.grid(row=2, column=0, padx=10, pady=10)
+
+        self.setting_password_entry2 = tk.Entry(self.setting_password_frame, textvariable=self.new_password, show='*')
+        self.setting_password_entry2.grid(row=2, column=1)
+
+        self.setting_password_label3 = tk.Label(self.setting_password_frame, text=f"Verify New Password :--> ",
+                                                font="times 20 bold")
+        self.setting_password_label3.grid(row=3, column=0, padx=10, pady=10)
+
+        self.setting_password_entry3 = tk.Entry(self.setting_password_frame, textvariable=self.verify_new_password, show='*')
+        self.setting_password_entry3.grid(row=3, column=1)
+
+        self.setting_password_button5 = tk.Button(self.setting_password_frame, text='Back', fg='blue',
+                                         command=self.setting_password_back,
+                                         font="times 15 bold")
+        self.setting_password_button5.grid(row=4, column=0, columnspan=2, pady=10)
+
+        self.setting_password_button5 = tk.Button(self.setting_password_frame, text='Update', fg='blue',
+                                                  command=self.setting_password_update,
+                                                  font="times 15 bold")
+        self.setting_password_button5.grid(row=4, column=2, columnspan=2, pady=10)
+
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx"""
+
+    def setting_password_back(self):
+        self.setting_password_frame.pack_forget()
+
+        self.setting()
+
+
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+
+    def setting_password_update(self):
+
+        if self.password.get() == self.old_password.get():
+            if self.new_password.get() == self.verify_new_password.get():
+                cmd1 = f"update xyz set password='{self.new_password.get()}' where username='{self.username.get()}'"
+                db_execute_fetch(cmd1)
+
+                tmsg.showinfo('Setting', 'Message--->>> Your Password Is Updated Successfully.....')
+
+                self.setting_password_frame.pack_forget()
+                self.password.set('')
+                self.old_password.set('')
+                self.new_password.set('')
+                self.verify_new_password.set('')
+                self.menu()
+
+            else:
+                tmsg.showwarning('Setting', 'Warning--->>> Password Verification is Failed..Please Enter Correct Password...')
+
+
+        else:
+            tmsg.showwarning('Setting', 'Warning-->>> Your Old Password Does Not Match...Please Enter Correct Password....')
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+
+    def setting_name(self):
+
+        self.setting_frame.pack_forget()
+
+        self.setting_name_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+        self.setting_name_frame.pack(side="top", pady=150)
+
+        self.setting_name_label1 = tk.Label(self.setting_name_frame, text=f"First Name :--> ",
+                                                font="times 20 bold")
+        self.setting_name_label1.grid(row=1, column=0, padx=10, pady=10)
+
+        self.setting_name_entry1 = tk.Entry(self.setting_name_frame, textvariable=self.new_first_name)
+        self.setting_name_entry1.grid(row=1, column=1)
+
+        self.setting_name_label2 = tk.Label(self.setting_name_frame, text=f"Last Name :--> ",
+                                            font="times 20 bold")
+        self.setting_name_label2.grid(row=2, column=0, padx=10, pady=10)
+
+        self.setting_name_entry2 = tk.Entry(self.setting_name_frame, textvariable=self.new_last_name)
+        self.setting_name_entry2.grid(row=2, column=1)
+
+        self.setting_name_button5 = tk.Button(self.setting_password_frame, text='Back', fg='blue',
+                                                  command=self.setting_password_back,
+                                                  font="times 15 bold")
+        self.setting_name_button5.grid(row=4, column=0, columnspan=2, pady=10)
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+    def setting_email(self):
+        pass
+
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+
+    def setting_phone_number(self):
+        pass
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+
+    def setting_back(self):
+        self.setting_frame.pack_forget()
+        self.login()
 
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
@@ -370,15 +561,131 @@ class Bank:
 
 
     def signup(self):
-        pass
+
+        self.menu_frame.pack_forget()
+
+        self.signup_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+        self.signup_frame.pack(side="top", pady=50)
+
+        self.signup_label1 = tk.Label(self.signup_frame, text="***Enter Your Details To Signup ***", bg='blue', font="times 35 bold")
+        self.signup_label1.grid(row=0, column=0, padx=10, columnspan=3)
+
+        ask_list = ['Username', 'First Name', 'Last Name', 'Password', 'Verify Password', 'Email', 'Phone Number']
+        for i in range(0, len(ask_list)):
+            self.signup_label2 = tk.Label(self.signup_frame, text=f"{ask_list[i]}:--> ", font="times 20 bold")
+            self.signup_label2.grid(row=i+1, column=1, padx=10, pady=10)
+
+
+        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.username)
+        self.signup_entry1.grid(row=1, column=2)
+
+        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.first_name)
+        self.signup_entry1.grid(row=2, column=2)
+
+        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.last_name)
+        self.signup_entry1.grid(row=3, column=2)
+
+        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.password, show='*')
+        self.signup_entry1.grid(row=4, column=2)
+
+        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.verify_password, show='*')
+        self.signup_entry1.grid(row=5, column=2)
+
+        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.email)
+        self.signup_entry1.grid(row=6, column=2)
+
+        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.phone_number)
+        self.signup_entry1.grid(row=7, column=2)
+
+        self.signup_button1 = tk.Button(self.signup_frame, text='Login', fg='blue', command=self.signup_login,
+                                      font="times 15 bold")
+        self.signup_button1.grid(row=9, column=1, pady=20, padx=10,columnspan=3)
+
+        self.signup_button2 = tk.Button(self.signup_frame, text='Submit', fg='blue', command=self.signup_submit,
+                                      font="times 15 bold")
+        self.signup_button2.grid(row=9, column=2, pady=20)
+
+
+
+        """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+    def signup_login(self):
+        self.signup_frame.pack_forget()
+        self.menu()
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+    def signup_submit(self):
+
+        cmd = f"select * from xyz where username='{self.username.get()}'"
+        db_connection()
+        db_execute_fetch(cmd)
+
+        if not data:
+            if self.password.get() == self.verify_password.get():
+
+                while True:
+                    q, w, e, r, t, y, u, i, o, p, l = map(str, [randint(0, 9) for i in range(11)])
+                    """Assigning 11 random number to update
+                    account-number in database."""
+                    a = q + w + e + r + t + y + u + i + o + p + l
+
+                    cmd1 = "select * from xyz where account_number='{a}'"
+                    # Here I am not database' functions which I created above.
+                    cursor.execute(cmd1)
+                    data1 = cursor.fetchall()
+                    if data1:
+                        """checking whether a randomly generated account number is already
+                        in bank databse or not."""
+                        continue
+                    else:
+                        break
+
+
+
+                if len(self.phone_number.get()) == 10:
+                    try:
+
+                        int_phone_number = int(self.phone_number.get())
+                        cmd2 = f"insert into xyz values('{self.username.get()}','{self.first_name.get()}','{self.last_name.get()}',0,'{a}','{self.password.get()}','{self.email.get()}','{int_phone_number}')"
+                        db_execute_insert(cmd2)
+                        db_close()
+
+                        tmsg.showinfo('Signup', f'Hello {self.first_name.get().title()} {self.last_name.get().title()}...Account Is Successfully Created With Initial Balance Of Rs 0... Enjoy The Services Of XYZ Bank....Have A Nice Day...')
+
+
+                        self.username.set('')
+                        self.phone_number.set('')
+                        self.first_name.set('')
+                        self.last_name.set('')
+                        self.password.set('')
+                        self.verify_password.set('')
+                        self.email.set('')
+
+
+                        self.signup_login()
+
+                    except Exception as e:
+                        tmsg.showwarning('Signup', 'Warning-->>>  Enter Only Digits.....')
+
+                else:
+                    tmsg.showwarning('Signup', 'Warning--->>>  Enter Only 10 Digits Phone Number..... ')
+
+            else:
+                tmsg.showwarning("Signup", "Warning-->>>>  Password Verification is Failed....Please Verify Your Password Again")
+
+        else:
+            tmsg.showinfo("Signup", "Sorry---->>>>>   Username has been Already Taken...Please Choose Another Username..")
 
 
 
 
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
 
 
 """***********************************************************************************************************************"""
+
 
 if __name__=="__main__":
     window = Bank()

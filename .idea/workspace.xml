@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cd28084e-0694-4c16-9a58-0d5a48e2f2df" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/bank.py" beforeDir="false" afterPath="$PROJECT_DIR$/bank.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bank.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/bank.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/practice.py" beforeDir="false" afterPath="$PROJECT_DIR$/practice.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,8 +17,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bank.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="376" lean-forward="true" selection-start-line="376" selection-end-line="376" />
+            <state relative-caret-position="256">
+              <caret line="535" column="34" lean-forward="true" selection-start-line="535" selection-start-column="34" selection-end-line="535" selection-end-column="34" />
+              <folding>
+                <element signature="e#172#235#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -25,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/practice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="153">
+              <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -44,7 +48,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -84,7 +88,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.practice">
+  <component name="RunManager" selected="Python.bank">
     <configuration name="bank" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="bank" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,8 +133,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.practice" />
         <item itemvalue="Python.bank" />
+        <item itemvalue="Python.practice" />
       </list>
     </recent_temporary>
   </component>
@@ -156,7 +160,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32972974" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32972974" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -173,15 +177,18 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/practice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="153">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="376" lean-forward="true" selection-start-line="376" selection-end-line="376" />
+        <state relative-caret-position="256">
+          <caret line="535" column="34" lean-forward="true" selection-start-line="535" selection-start-column="34" selection-end-line="535" selection-end-column="34" />
+          <folding>
+            <element signature="e#172#235#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
