@@ -8,11 +8,12 @@ import tkinter as tk
 import sqlite3 as sql
 import tkinter.messagebox as tmsg
 from PIL import Image, ImageTk
+#Importing PIL to upload jpg and others extension's images in tkinter..
 
 """    ******************************************************************************************************************** """
 
-# creating functions for database
-# creating 3 global functions so that we can use them in functions like debit, credit etc.
+# creating functions for sqlite3 database.
+# creating 3 global variables so that we can use them in functions like debit, credit etc.
 db = None
 cursor = None
 data = None
@@ -33,8 +34,9 @@ data= ('rahul123',
 
 def db_connection():
     global db, cursor
-    db = sql.connect("data/bank.db")
+    db = sql.connect("data/bank.db") # Connecting to database if it exits otherwise it will create it.
     cursor = db.cursor()
+    # exception handling -->>
     try:
         cursor.execute("create table xyz(username varchar(50) not null primary key, first_name varchar(50) not null, last_name varchar(50) not null, balance int(50) not null, account_number varchar(50) not null, password varchar(50) not null, email varchar(50) not null, phone_number int(50) not null) ")
         cursor.execute("insert into xyz values('rahul123', 'Rahul', 'Charan', 20000, 11100011101, 'rahul456', 'charan7rahul@gmail.com', 7296925650)")
@@ -76,9 +78,12 @@ class Bank:
         self.root = tk.Tk()
         self.root.geometry("700x600")
         self.root.minsize(200,200)
-        self.root.wm_iconbitmap("static/icons/5.ico")
+        self.root.wm_iconbitmap("static/icons/5.ico")   # adding icon to software.
         self.root.config(background="#FFDAB9")
         self.root.title("XYZ Bank")
+
+        #Creating Useful Variables....
+
         self.username = tk.StringVar()
         self.password = tk.StringVar()
         self.amount = tk.StringVar()
@@ -104,6 +109,8 @@ class Bank:
     """  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX """
 
     def image_insert(self):
+        # This function is to add images in the software.
+
         try:
 
             self.image1 = Image.open("static/images/3.jpg")
@@ -149,6 +156,7 @@ class Bank:
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
     def image_delete(self):
+        # This function is to remove the images from software.
         try:
 
             self.image_label1.pack_forget()
@@ -169,7 +177,9 @@ class Bank:
 
         try:
 
-            self.image_insert()
+            self.image_insert()   #Inserting all images whenever the menu() function will call..
+
+            #Creating Frame, Label, Entry, Button..
 
             self.menu_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
             self.menu_frame.pack(side="top", pady=150)
@@ -217,9 +227,9 @@ class Bank:
             cmd = f"select * from xyz where username='{self.username.get()}'"
             db_execute_fetch(cmd)
 
-            if data:
-                if self.password.get() == data[5]:
-                    self.menu_frame.pack_forget()
+            if data:    # Checking whether the User exits Or Not.....
+                if self.password.get() == data[5]:   # Checking the Password...
+                    self.menu_frame.pack_forget()     # Removing the menu_frame and then creating the login_frame...
 
 
                     self.login_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
@@ -258,7 +268,7 @@ class Bank:
                     tmsg.showinfo("Login", "Incorrect Password  !!!!!!!!")
 
             else:
-                tmsg.showinfo(title='Login',message="User Does Not Exist...Please Enter Correct Username.......")
+                tmsg.showinfo(title='Login', message="User Does Not Exist...Please Enter Correct Username.......")
 
 
         except Exception as e:
@@ -307,13 +317,15 @@ class Bank:
     def debit_submit(self):
         try:
             extra_amount = int(self.amount.get())
-            if data[3] > extra_amount:
+            if data[3] > extra_amount:   # Checking whether the Amount Is Available or not.....
                 new_amount = data[3] - extra_amount
                 cmd1 = f"update xyz set balance='{new_amount}' where username='{self.username.get()}' "
                 db_execute_insert(cmd1)
+                # Updating the database....
 
                 tmsg.showinfo("Debit", f"Amount Rs {extra_amount} is Debitted From Your Account...")
 
+                # Setting the self.amount variable to blank string so the it can be used again..
                 self.amount.set('')
                 self.debit_frame.pack_forget()
                 self.login()
@@ -476,10 +488,13 @@ class Bank:
 
 
     def logout(self):
+        #Removing login_frame, menu_label, and deleting the images so that they can be uploaded again...
+
         self.login_frame.pack_forget()
         self.menu_label.pack_forget()
         self.image_delete()
 
+        # Setting all variables to blank string.....
         self.username.set('')
         self.password.set('')
         self.phone_number.set('')
@@ -487,9 +502,11 @@ class Bank:
         self.last_name.set('')
         self.email.set('')
 
+        db_close()
+
         self.menu()
 
-        db_close()
+
 
 
 
@@ -608,9 +625,9 @@ class Bank:
 
         try:
 
-            if self.password.get() == self.old_password.get():
-                if self.new_password.get():
-                    if self.new_password.get() == self.verify_new_password.get():
+            if self.password.get() == self.old_password.get():   # Checking whether s/he entered a correct old password or not.....
+                if self.new_password.get():   # Checking whether s/he entered a new password or not...
+                    if self.new_password.get() == self.verify_new_password.get():   # Password Verification.....
                         cmd1 = f"update xyz set password='{self.new_password.get()}' where username='{self.username.get()}'"
                         db_execute_fetch(cmd1)
 
@@ -695,7 +712,7 @@ class Bank:
     def setting_name_update(self):
 
         try:
-            if self.new_first_name.get():
+            if self.new_first_name.get():   #Checking Whether s/he entered a new first name or not....
 
                 cmd1 = f"update xyz set first_name='{self.new_first_name.get()}' where username='{self.username.get()}'"
                 db_execute_fetch(cmd1)
@@ -768,7 +785,7 @@ class Bank:
 
     def setting_email_update(self):
         try:
-            if self.new_email.get():
+            if self.new_email.get():   #Checking whether s/he entered a new email or not...
 
                 cmd1 = f"update xyz set email='{self.new_email.get()}' where username='{self.username.get()}'"
                 db_execute_fetch(cmd1)
@@ -839,7 +856,7 @@ class Bank:
     def setting_phone_number_update(self):
 
         try:
-            if len(self.new_phone_number.get()) == 10:
+            if len(self.new_phone_number.get()) == 10:   # Checking whether a new phone number is of 10 digits or not....
                 try:
 
                     new_ph = int(self.new_phone_number.get())
@@ -960,17 +977,17 @@ class Bank:
 
         try:
 
-            if self.username.get():
-                if self.first_name.get():
-                    if self.password.get():
-                        if self.email.get():
-                            if self.phone_number.get():
+            if self.username.get():    #Checking Whether s/he entered a username or not....
+                if self.first_name.get():   #Checking Whether s/he entered a first name or not....
+                    if self.password.get():    #Checking Whether s/he entered a Password or not....
+                        if self.email.get():     #Checking Whether s/he entered a Email or not....
+                            if self.phone_number.get():     #Checking Whether s/he entered a Phone Number or not....
                                 cmd = f"select * from xyz where username='{self.username.get()}'"
                                 db_connection()
                                 db_execute_fetch(cmd)
 
-                                if not data:
-                                    if self.password.get() == self.verify_password.get():
+                                if not data:    #Checking whether Username exits or not....
+                                    if self.password.get() == self.verify_password.get():   # Password Verification...
 
                                         while True:
                                             q, w, e, r, t, y, u, i, o, p, l = map(str, [randint(0, 9) for i in range(11)])
@@ -984,14 +1001,14 @@ class Bank:
                                             data1 = cursor.fetchall()
                                             if data1:
                                                 """checking whether a randomly generated account number is already
-                                                in bank databse or not."""
+                                                in bank database or not."""
                                                 continue
                                             else:
                                                 break
 
 
 
-                                        if len(self.phone_number.get()) == 10:
+                                        if len(self.phone_number.get()) == 10:   #Phone Number must be of 10 digits ....
                                             try:
 
                                                 int_phone_number = int(self.phone_number.get())

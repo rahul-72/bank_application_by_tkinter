@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bank.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4573">
-              <caret line="618" column="65" lean-forward="true" selection-start-line="618" selection-start-column="65" selection-end-line="618" selection-end-column="65" />
+            <state relative-caret-position="-1087">
+              <caret line="1010" column="120" selection-start-line="1010" selection-start-column="120" selection-end-line="1010" selection-end-column="120" />
               <folding>
                 <element signature="e#172#235#0" expanded="true" />
               </folding>
@@ -199,8 +199,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4573">
-          <caret line="618" column="65" lean-forward="true" selection-start-line="618" selection-start-column="65" selection-end-line="618" selection-end-column="65" />
+        <state relative-caret-position="-1087">
+          <caret line="1010" column="120" selection-start-line="1010" selection-start-column="120" selection-end-line="1010" selection-end-column="120" />
           <folding>
             <element signature="e#172#235#0" expanded="true" />
           </folding>
