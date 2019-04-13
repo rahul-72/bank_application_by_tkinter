@@ -1,24 +1,12 @@
 import tkinter as tk
-
+from PIL import Image, ImageTk
 root = tk.Tk()
-b = tk.StringVar()
-w=5
-def hello():
-    try:
-        q = int(b.get())
-        print(q)
-        try:
-            w+=1
-        except Exception as e:
-            print(e)
 
-        print(type(q))
+image = Image.open("static/images/1.jpg")
+photo = ImageTk.PhotoImage(image)
 
-    except ValueError:
-        print("hi")
-
-a = tk.Entry(root, textvariable=b).pack()
-bu= tk.Button(root, text='submit', command=hello).pack()
+label = tk.Label(root, image=photo)
+label.pack()
 
 
 root.mainloop()

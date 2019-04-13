@@ -7,6 +7,7 @@ from random import randint
 import tkinter as tk
 import sqlite3 as sql
 import tkinter.messagebox as tmsg
+from PIL import Image, ImageTk
 
 """    ******************************************************************************************************************** """
 
@@ -98,16 +99,53 @@ class Bank:
 
 
 
+
+
     """  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX """
+
+    def image_insert(self):
+
+        self.image1 = Image.open("static/images/3.jpg")
+        self.photo1 = ImageTk.PhotoImage(self.image1)
+
+        self.image_label1 = tk.Label(self.root, image=self.photo1)
+        self.image_label1.pack(side='left', anchor='nw')
+
+        self.image2 = Image.open("static/images/6.jpg")
+        self.photo2 = ImageTk.PhotoImage(self.image2)
+
+        self.image_label2 = tk.Label(self.root, image=self.photo2)
+        self.image_label2.place(x=400, y=400)
+
+        self.image3 = Image.open("static/images/8.jpg")
+        self.photo3 = ImageTk.PhotoImage(self.image3)
+
+        self.image_label3 = tk.Label(self.root, image=self.photo3)
+        self.image_label3.place(x=400, y=0)
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+
+    def image_delete(self):
+
+        self.image_label1.pack_forget()
+        self.image_label2.place_forget()
+        self.image_label3.place_forget()
+
+
+
+    """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
     def menu(self):
 
         try:
+
+            self.image_insert()
+
             self.menu_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
             self.menu_frame.pack(side="top", pady=150)
 
             self.menu_label = tk.Label(self.root, text="****By Rahul Charan****", bg='blue',
-                                        font="times 25 bold")
+                                       font="times 25 italic")
             self.menu_label.pack(side='bottom', anchor='se')
 
 
@@ -132,6 +170,7 @@ class Bank:
 
             self.menu_button2 = tk.Button(self.menu_frame, text='Signup', fg='blue', command=self.signup, font="times 15 bold")
             self.menu_button2.grid(row=3, column=2, pady=10)
+
 
 
         except Exception as e:
@@ -407,6 +446,7 @@ class Bank:
     def logout(self):
         self.login_frame.pack_forget()
         self.menu_label.pack_forget()
+        self.image_delete()
 
         self.username.set('')
         self.password.set('')
@@ -539,6 +579,8 @@ class Bank:
                 self.verify_new_password.set('')
 
                 self.setting_label_detail.pack_forget()
+                self.image_delete()
+
                 self.menu()
 
             else:
@@ -738,7 +780,7 @@ class Bank:
     def setting_back(self):
         self.setting_frame.pack_forget()
         self.setting_label_detail.pack_forget()
-        
+
         self.login()
 
 
@@ -797,6 +839,10 @@ class Bank:
 
     def signup_login(self):
         self.signup_frame.pack_forget()
+        self.menu_label.pack_forget()
+
+        self.image_delete()
+
         self.menu()
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
