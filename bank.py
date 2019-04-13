@@ -544,40 +544,46 @@ class Bank:
 
     def setting_password(self):
 
-        self.setting_frame.pack_forget()
+        try:
 
-        self.setting_password_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
-        self.setting_password_frame.pack(side="top", pady=150)
+            self.setting_frame.pack_forget()
 
-        self.setting_password_label1 = tk.Label(self.setting_password_frame, text=f"Old Password :--> ", font="times 20 bold")
-        self.setting_password_label1.grid(row=1, column=0, padx=10, pady=10)
+            self.setting_password_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
+            self.setting_password_frame.pack(side="top", pady=150)
 
-        self.setting_password_entry1 = tk.Entry(self.setting_password_frame, textvariable=self.old_password, show='*')
-        self.setting_password_entry1.grid(row=1, column=1)
+            self.setting_password_label1 = tk.Label(self.setting_password_frame, text=f"Old Password :--> ", font="times 20 bold")
+            self.setting_password_label1.grid(row=1, column=0, padx=10, pady=10)
 
-        self.setting_password_label2 = tk.Label(self.setting_password_frame, text=f"New Password :--> ",
-                                                font="times 20 bold")
-        self.setting_password_label2.grid(row=2, column=0, padx=10, pady=10)
+            self.setting_password_entry1 = tk.Entry(self.setting_password_frame, textvariable=self.old_password, show='*')
+            self.setting_password_entry1.grid(row=1, column=1)
 
-        self.setting_password_entry2 = tk.Entry(self.setting_password_frame, textvariable=self.new_password, show='*')
-        self.setting_password_entry2.grid(row=2, column=1)
+            self.setting_password_label2 = tk.Label(self.setting_password_frame, text=f"New Password :--> ",
+                                                    font="times 20 bold")
+            self.setting_password_label2.grid(row=2, column=0, padx=10, pady=10)
 
-        self.setting_password_label3 = tk.Label(self.setting_password_frame, text=f"Verify New Password :--> ",
-                                                font="times 20 bold")
-        self.setting_password_label3.grid(row=3, column=0, padx=10, pady=10)
+            self.setting_password_entry2 = tk.Entry(self.setting_password_frame, textvariable=self.new_password, show='*')
+            self.setting_password_entry2.grid(row=2, column=1)
 
-        self.setting_password_entry3 = tk.Entry(self.setting_password_frame, textvariable=self.verify_new_password, show='*')
-        self.setting_password_entry3.grid(row=3, column=1)
+            self.setting_password_label3 = tk.Label(self.setting_password_frame, text=f"Verify New Password :--> ",
+                                                    font="times 20 bold")
+            self.setting_password_label3.grid(row=3, column=0, padx=10, pady=10)
 
-        self.setting_password_button5 = tk.Button(self.setting_password_frame, text='<<<--Back', fg='blue',
-                                         command=self.setting_password_back,
-                                         font="times 15 bold")
-        self.setting_password_button5.grid(row=4, column=0, columnspan=2, pady=10)
+            self.setting_password_entry3 = tk.Entry(self.setting_password_frame, textvariable=self.verify_new_password, show='*')
+            self.setting_password_entry3.grid(row=3, column=1)
 
-        self.setting_password_button5 = tk.Button(self.setting_password_frame, text='*Update*', fg='blue',
-                                                  command=self.setting_password_update,
-                                                  font="times 15 bold")
-        self.setting_password_button5.grid(row=4, column=2, columnspan=2, pady=10)
+            self.setting_password_button5 = tk.Button(self.setting_password_frame, text='<<<--Back', fg='blue',
+                                             command=self.setting_password_back,
+                                             font="times 15 bold")
+            self.setting_password_button5.grid(row=4, column=0, columnspan=2, pady=10)
+
+            self.setting_password_button5 = tk.Button(self.setting_password_frame, text='*Update*', fg='blue',
+                                                      command=self.setting_password_update,
+                                                      font="times 15 bold")
+            self.setting_password_button5.grid(row=4, column=2, columnspan=2, pady=10)
+
+
+        except Exception as e:
+            tmsg.showwarning('Error', e)
 
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx"""
@@ -595,64 +601,75 @@ class Bank:
 
     def setting_password_update(self):
 
-        if self.password.get() == self.old_password.get():
-            if self.new_password.get() == self.verify_new_password.get():
-                cmd1 = f"update xyz set password='{self.new_password.get()}' where username='{self.username.get()}'"
-                db_execute_fetch(cmd1)
+        try:
 
-                tmsg.showinfo('Setting', 'Message--->>> Your Password Is Updated Successfully.....')
+            if self.password.get() == self.old_password.get():
+                if self.new_password.get() == self.verify_new_password.get():
+                    cmd1 = f"update xyz set password='{self.new_password.get()}' where username='{self.username.get()}'"
+                    db_execute_fetch(cmd1)
 
-                self.setting_password_frame.pack_forget()
-                self.password.set('')
-                self.old_password.set('')
-                self.new_password.set('')
-                self.verify_new_password.set('')
+                    tmsg.showinfo('Setting', 'Message--->>> Your Password Is Updated Successfully.....')
 
-                self.setting_label_detail.pack_forget()
-                self.image_delete()
+                    self.setting_password_frame.pack_forget()
+                    self.password.set('')
+                    self.old_password.set('')
+                    self.new_password.set('')
+                    self.verify_new_password.set('')
 
-                self.menu()
+                    self.setting_label_detail.pack_forget()
+                    self.image_delete()
+
+                    self.menu()
+
+                else:
+                    tmsg.showwarning('Setting', 'Warning--->>> Password Verification is Failed..Please Enter Correct Password...')
+
 
             else:
-                tmsg.showwarning('Setting', 'Warning--->>> Password Verification is Failed..Please Enter Correct Password...')
+                tmsg.showwarning('Setting', 'Warning-->>> Your Old Password Does Not Match...Please Enter Correct Password....')
 
 
-        else:
-            tmsg.showwarning('Setting', 'Warning-->>> Your Old Password Does Not Match...Please Enter Correct Password....')
+        except Exception as e:
+            tmsg.showerror('Error', e)
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
 
     def setting_name(self):
+        try:
 
-        self.setting_frame.pack_forget()
+            self.setting_frame.pack_forget()
 
-        self.setting_name_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
-        self.setting_name_frame.pack(side="top", pady=150)
+            self.setting_name_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
+            self.setting_name_frame.pack(side="top", pady=150)
 
-        self.setting_name_label1 = tk.Label(self.setting_name_frame, text=f"First Name :--> ",
+            self.setting_name_label1 = tk.Label(self.setting_name_frame, text=f"First Name :--> ",
+                                                    font="times 20 bold")
+            self.setting_name_label1.grid(row=1, column=0, padx=10, pady=10)
+
+            self.setting_name_entry1 = tk.Entry(self.setting_name_frame, textvariable=self.new_first_name)
+            self.setting_name_entry1.grid(row=1, column=1)
+
+            self.setting_name_label2 = tk.Label(self.setting_name_frame, text=f"Last Name :--> ",
                                                 font="times 20 bold")
-        self.setting_name_label1.grid(row=1, column=0, padx=10, pady=10)
+            self.setting_name_label2.grid(row=2, column=0, padx=10, pady=10)
 
-        self.setting_name_entry1 = tk.Entry(self.setting_name_frame, textvariable=self.new_first_name)
-        self.setting_name_entry1.grid(row=1, column=1)
+            self.setting_name_entry2 = tk.Entry(self.setting_name_frame, textvariable=self.new_last_name)
+            self.setting_name_entry2.grid(row=2, column=1)
 
-        self.setting_name_label2 = tk.Label(self.setting_name_frame, text=f"Last Name :--> ",
-                                            font="times 20 bold")
-        self.setting_name_label2.grid(row=2, column=0, padx=10, pady=10)
+            self.setting_name_button5 = tk.Button(self.setting_name_frame, text='<<<--Back', fg='blue',
+                                                      command=self.setting_name_back,
+                                                      font="times 15 bold")
+            self.setting_name_button5.grid(row=3, column=0,  pady=10)
 
-        self.setting_name_entry2 = tk.Entry(self.setting_name_frame, textvariable=self.new_last_name)
-        self.setting_name_entry2.grid(row=2, column=1)
-
-        self.setting_name_button5 = tk.Button(self.setting_name_frame, text='<<<--Back', fg='blue',
-                                                  command=self.setting_name_back,
+            self.setting_name_button5 = tk.Button(self.setting_name_frame, text='*Update*', fg='blue',
+                                                  command=self.setting_name_update,
                                                   font="times 15 bold")
-        self.setting_name_button5.grid(row=3, column=0,  pady=10)
+            self.setting_name_button5.grid(row=3, column=1, columnspan=2, pady=10)
 
-        self.setting_name_button5 = tk.Button(self.setting_name_frame, text='*Update*', fg='blue',
-                                              command=self.setting_name_update,
-                                              font="times 15 bold")
-        self.setting_name_button5.grid(row=3, column=1, columnspan=2, pady=10)
+
+        except Exception as e:
+            tmsg.showerror('Error', e)
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
@@ -666,52 +683,62 @@ class Bank:
 
     def setting_name_update(self):
 
-        cmd1 = f"update xyz set first_name='{self.new_first_name.get()}' where username='{self.username.get()}'"
-        db_execute_fetch(cmd1)
+        try:
 
-        cmd2 = f"update xyz set last_name='{self.new_last_name.get()}' where username='{self.username.get()}'"
-        db_execute_fetch(cmd2)
+            cmd1 = f"update xyz set first_name='{self.new_first_name.get()}' where username='{self.username.get()}'"
+            db_execute_fetch(cmd1)
+
+            cmd2 = f"update xyz set last_name='{self.new_last_name.get()}' where username='{self.username.get()}'"
+            db_execute_fetch(cmd2)
 
 
 
-        tmsg.showinfo('Setting', f'Message--->>> Your Name Is Updated Successfully...Your New Name Is-->>  {self.new_first_name.get().title()} {self.new_last_name.get().title()}.....')
+            tmsg.showinfo('Setting', f'Message--->>> Your Name Is Updated Successfully...Your New Name Is-->>  {self.new_first_name.get().title()} {self.new_last_name.get().title()}.....')
 
-        self.setting_name_frame.pack_forget()
+            self.setting_name_frame.pack_forget()
 
-        self.new_first_name.set('')
-        self.new_last_name.set('')
+            self.new_first_name.set('')
+            self.new_last_name.set('')
 
-        self.setting_label_detail.pack_forget()
+            self.setting_label_detail.pack_forget()
 
-        self.setting()
+            self.setting()
+
+
+        except Exception as e:
+            tmsg.showwarning('Warning', 'Warning--->>>  Please Fill All The Details.........')
 
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
     def setting_email(self):
+        try:
 
-        self.setting_frame.pack_forget()
+            self.setting_frame.pack_forget()
 
-        self.setting_email_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
-        self.setting_email_frame.pack(side="top", pady=150)
+            self.setting_email_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
+            self.setting_email_frame.pack(side="top", pady=150)
 
-        self.setting_email_label1 = tk.Label(self.setting_email_frame, text=f"Enter New Email :--> ",
-                                            font="times 20 bold")
-        self.setting_email_label1.grid(row=1, column=0, padx=10, pady=10)
+            self.setting_email_label1 = tk.Label(self.setting_email_frame, text=f"Enter New Email :--> ",
+                                                font="times 20 bold")
+            self.setting_email_label1.grid(row=1, column=0, padx=10, pady=10)
 
-        self.setting_email_entry1 = tk.Entry(self.setting_email_frame, textvariable=self.new_email)
-        self.setting_email_entry1.grid(row=1, column=1)
+            self.setting_email_entry1 = tk.Entry(self.setting_email_frame, textvariable=self.new_email)
+            self.setting_email_entry1.grid(row=1, column=1)
 
 
-        self.setting_email_button5 = tk.Button(self.setting_email_frame, text='<<<--Back', fg='blue',
-                                              command=self.setting_email_back,
-                                              font="times 15 bold")
-        self.setting_email_button5.grid(row=3, column=0, pady=10)
+            self.setting_email_button5 = tk.Button(self.setting_email_frame, text='<<<--Back', fg='blue',
+                                                  command=self.setting_email_back,
+                                                  font="times 15 bold")
+            self.setting_email_button5.grid(row=3, column=0, pady=10)
 
-        self.setting_email_button5 = tk.Button(self.setting_email_frame, text='*Update*', fg='blue',
-                                              command=self.setting_email_update,
-                                              font="times 15 bold")
-        self.setting_email_button5.grid(row=3, column=1, columnspan=2, pady=10)
+            self.setting_email_button5 = tk.Button(self.setting_email_frame, text='*Update*', fg='blue',
+                                                  command=self.setting_email_update,
+                                                  font="times 15 bold")
+            self.setting_email_button5.grid(row=3, column=1, columnspan=2, pady=10)
+
+        except Exception as e:
+            tmsg.showerror('Error', e)
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
@@ -724,48 +751,58 @@ class Bank:
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
     def setting_email_update(self):
+        try:
 
-        cmd1 = f"update xyz set email='{self.new_email.get()}' where username='{self.username.get()}'"
-        db_execute_fetch(cmd1)
+            cmd1 = f"update xyz set email='{self.new_email.get()}' where username='{self.username.get()}'"
+            db_execute_fetch(cmd1)
 
 
-        tmsg.showinfo('Setting', f'Message--->>> Your Email Is Updated Successfully...Your New Email Is -> {self.new_email.get()}.......')
+            tmsg.showinfo('Setting', f'Message--->>> Your Email Is Updated Successfully...Your New Email Is -> {self.new_email.get()}.......')
 
-        self.setting_email_frame.pack_forget()
+            self.setting_email_frame.pack_forget()
 
-        self.new_email.set('')
+            self.new_email.set('')
 
-        self.setting_label_detail.pack_forget()
+            self.setting_label_detail.pack_forget()
 
-        self.setting()
+            self.setting()
+
+
+        except Exception as e:
+            tmsg.showwarning('Warning', 'Warning--->>>  Please Fill All The Details.........')
 
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
 
     def setting_phone_number(self):
+        try:
 
-        self.setting_frame.pack_forget()
+            self.setting_frame.pack_forget()
 
-        self.setting_phone_number_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
-        self.setting_phone_number_frame.pack(side="top", pady=150)
+            self.setting_phone_number_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
+            self.setting_phone_number_frame.pack(side="top", pady=150)
 
-        self.setting_phone_number_label1 = tk.Label(self.setting_phone_number_frame, text=f"Enter New Phone Number :--> ",
-                                             font="times 20 bold")
-        self.setting_phone_number_label1.grid(row=1, column=0, padx=10, pady=10)
+            self.setting_phone_number_label1 = tk.Label(self.setting_phone_number_frame, text=f"Enter New Phone Number :--> ",
+                                                 font="times 20 bold")
+            self.setting_phone_number_label1.grid(row=1, column=0, padx=10, pady=10)
 
-        self.setting_phone_number_entry1 = tk.Entry(self.setting_phone_number_frame, textvariable=self.new_phone_number)
-        self.setting_phone_number_entry1.grid(row=1, column=1)
+            self.setting_phone_number_entry1 = tk.Entry(self.setting_phone_number_frame, textvariable=self.new_phone_number)
+            self.setting_phone_number_entry1.grid(row=1, column=1)
 
-        self.setting_phone_number_button5 = tk.Button(self.setting_phone_number_frame, text='<<<--Back', fg='blue',
-                                               command=self.setting_phone_number_back,
-                                               font="times 15 bold")
-        self.setting_phone_number_button5.grid(row=3, column=0, pady=10)
+            self.setting_phone_number_button5 = tk.Button(self.setting_phone_number_frame, text='<<<--Back', fg='blue',
+                                                   command=self.setting_phone_number_back,
+                                                   font="times 15 bold")
+            self.setting_phone_number_button5.grid(row=3, column=0, pady=10)
 
-        self.setting_phone_number_button5 = tk.Button(self.setting_phone_number_frame, text='*Update*', fg='blue',
-                                               command=self.setting_phone_number_update,
-                                               font="times 15 bold")
-        self.setting_phone_number_button5.grid(row=3, column=1, columnspan=2, pady=10)
+            self.setting_phone_number_button5 = tk.Button(self.setting_phone_number_frame, text='*Update*', fg='blue',
+                                                   command=self.setting_phone_number_update,
+                                                   font="times 15 bold")
+            self.setting_phone_number_button5.grid(row=3, column=1, columnspan=2, pady=10)
+
+
+        except Exception as e:
+            tmsg.showerror('Error', e)
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
@@ -779,29 +816,33 @@ class Bank:
 
     def setting_phone_number_update(self):
 
+        try:
+            if len(self.new_phone_number.get()) == 10:
+                try:
 
-        if len(self.new_phone_number.get()) == 10:
-            try:
+                    new_ph = int(self.new_phone_number.get())
+                    cmd1 = f"update xyz set phone_number='{new_ph}' where username='{self.username.get()}'"
+                    db_execute_fetch(cmd1)
 
-                new_ph = int(self.new_phone_number.get())
-                cmd1 = f"update xyz set phone_number='{new_ph}' where username='{self.username.get()}'"
-                db_execute_fetch(cmd1)
+                    tmsg.showinfo('Setting',
+                                  f'Message--->>> Your phone_number Is Updated Successfully...Your New phone_number Is -> {new_ph}.......')
 
-                tmsg.showinfo('Setting',
-                              f'Message--->>> Your phone_number Is Updated Successfully...Your New phone_number Is -> {new_ph}.......')
+                    self.setting_phone_number_frame.pack_forget()
+                    self.setting_label_detail.pack_forget()
 
-                self.setting_phone_number_frame.pack_forget()
-                self.setting_label_detail.pack_forget()
+                    self.new_phone_number.set('')
 
-                self.new_phone_number.set('')
+                    self.setting()
 
-                self.setting()
+                except Exception as e:
+                    tmsg.showwarning('Setting', 'Warning--->>>  Enter Only Numerical Digits......')
 
-            except Exception as e:
-                tmsg.showwarning('Setting', 'Warning--->>>  Enter Only Numerical Digits......')
+            else:
+                tmsg.showwarning('Setting', 'Warning--->>> Enter Only 10 Digits Phone Number.....')
 
-        else:
-            tmsg.showwarning('Setting', 'Warning--->>> Enter Only 10 Digits Phone Number.....')
+
+        except Exception as e:
+            tmsg.showerror('Error', e)
 
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
@@ -819,49 +860,55 @@ class Bank:
 
 
     def signup(self):
+        try:
 
-        self.menu_frame.pack_forget()
+            self.menu_frame.pack_forget()
 
-        self.signup_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
-        self.signup_frame.pack(side="top", pady=50)
+            self.signup_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
+            self.signup_frame.pack(side="top", pady=50)
 
-        self.signup_label1 = tk.Label(self.signup_frame, text="***Enter Your Details To Signup ***", bg='#FFA07A', font="times 35 bold")
-        self.signup_label1.grid(row=0, column=0, padx=10, columnspan=3)
+            self.signup_label1 = tk.Label(self.signup_frame, text="***Enter Your Details To Signup ***", bg='#FFA07A', font="times 35 bold")
+            self.signup_label1.grid(row=0, column=0, padx=10, columnspan=3)
 
-        ask_list = ['Username', 'First Name', 'Last Name', 'Password', 'Verify Password', 'Email', 'Phone Number']
-        for i in range(0, len(ask_list)):
-            self.signup_label2 = tk.Label(self.signup_frame, text=f"{ask_list[i]}:--> ", font="times 20 bold")
-            self.signup_label2.grid(row=i+1, column=1, padx=10, pady=10)
+            ask_list = ['Username', 'First Name', 'Last Name', 'Password', 'Verify Password', 'Email', 'Phone Number']
+            for i in range(0, len(ask_list)):
+                self.signup_label2 = tk.Label(self.signup_frame, text=f"{ask_list[i]}:--> ", font="times 20 bold")
+                self.signup_label2.grid(row=i+1, column=1, padx=10, pady=10)
 
 
-        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.username)
-        self.signup_entry1.grid(row=1, column=2)
+            self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.username)
+            self.signup_entry1.grid(row=1, column=2)
 
-        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.first_name)
-        self.signup_entry1.grid(row=2, column=2)
+            self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.first_name)
+            self.signup_entry1.grid(row=2, column=2)
 
-        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.last_name)
-        self.signup_entry1.grid(row=3, column=2)
+            self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.last_name)
+            self.signup_entry1.grid(row=3, column=2)
 
-        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.password, show='*')
-        self.signup_entry1.grid(row=4, column=2)
+            self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.password, show='*')
+            self.signup_entry1.grid(row=4, column=2)
 
-        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.verify_password, show='*')
-        self.signup_entry1.grid(row=5, column=2)
+            self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.verify_password, show='*')
+            self.signup_entry1.grid(row=5, column=2)
 
-        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.email)
-        self.signup_entry1.grid(row=6, column=2)
+            self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.email)
+            self.signup_entry1.grid(row=6, column=2)
 
-        self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.phone_number)
-        self.signup_entry1.grid(row=7, column=2)
+            self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.phone_number)
+            self.signup_entry1.grid(row=7, column=2)
 
-        self.signup_button1 = tk.Button(self.signup_frame, text='*Login*', fg='blue', command=self.signup_login,
-                                      font="times 15 bold")
-        self.signup_button1.grid(row=9, column=1, pady=20, padx=10,columnspan=3)
+            self.signup_button1 = tk.Button(self.signup_frame, text='*Login*', fg='blue', command=self.signup_login,
+                                          font="times 15 bold")
+            self.signup_button1.grid(row=9, column=1, pady=20, padx=10,columnspan=3)
 
-        self.signup_button2 = tk.Button(self.signup_frame, text='*Signup*', fg='blue', command=self.signup_submit,
-                                      font="times 15 bold")
-        self.signup_button2.grid(row=9, column=2, pady=20)
+            self.signup_button2 = tk.Button(self.signup_frame, text='*Signup*', fg='blue', command=self.signup_submit,
+                                          font="times 15 bold")
+            self.signup_button2.grid(row=9, column=2, pady=20)
+
+
+
+        except Exception as e:
+            tmsg.showerror('Error', e)
 
 
 

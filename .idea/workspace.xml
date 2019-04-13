@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cd28084e-0694-4c16-9a58-0d5a48e2f2df" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/bank.py" beforeDir="false" afterPath="$PROJECT_DIR$/bank.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/2.jpg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bank.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="161" column="37" lean-forward="true" selection-start-line="161" selection-start-column="37" selection-end-line="161" selection-end-column="37" />
+            <state relative-caret-position="-1546">
+              <caret line="910" column="38" selection-start-line="910" selection-start-column="38" selection-end-line="910" selection-end-column="38" />
               <folding>
                 <element signature="e#172#235#0" expanded="true" />
               </folding>
@@ -200,8 +199,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="161" column="37" lean-forward="true" selection-start-line="161" selection-start-column="37" selection-end-line="161" selection-end-column="37" />
+        <state relative-caret-position="-1546">
+          <caret line="910" column="38" selection-start-line="910" selection-start-column="38" selection-end-line="910" selection-end-column="38" />
           <folding>
             <element signature="e#172#235#0" expanded="true" />
           </folding>
