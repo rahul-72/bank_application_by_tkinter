@@ -73,9 +73,9 @@ def db_close():
 class Bank:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.geometry("700x700")
+        self.root.geometry("700x600")
         self.root.minsize(200,200)
-        self.root.wm_iconbitmap("static/icons/piggy-bank.png")
+        self.root.wm_iconbitmap("static/icons/5.ico")
         self.root.config(background="grey")
         self.root.title("XYZ Bank")
         self.username = tk.StringVar()
@@ -105,6 +105,10 @@ class Bank:
         try:
             self.menu_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
             self.menu_frame.pack(side="top", pady=150)
+
+            self.menu_label = tk.Label(self.root, text="****By Rahul Charan****", bg='blue',
+                                        font="times 25 bold")
+            self.menu_label.pack(side='bottom', anchor='se')
 
             self.menu_label1 = tk.Label(self.menu_frame, text="**Welcome To The XYZ Bank**", bg='blue', font="times 35 bold")
             self.menu_label1.grid(row=0, column=0, padx=10, columnspan=3)

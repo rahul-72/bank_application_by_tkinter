@@ -2,9 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd28084e-0694-4c16-9a58-0d5a48e2f2df" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/bank.exe" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bank.py" beforeDir="false" afterPath="$PROJECT_DIR$/bank.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bank.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/bank.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice.py" beforeDir="false" afterPath="$PROJECT_DIR$/practice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bank.spec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bank/Analysis-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bank/EXE-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bank/PKG-00.pkg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bank/PKG-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bank/PYZ-00.pyz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bank/PYZ-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bank/Tree-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bank/Tree-01.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bank/bank.exe.manifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bank/base_library.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bank/warn-bank.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bank/xref-bank.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/bank.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/icons/piggy-bank.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bank.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="859" lean-forward="true" selection-start-line="859" selection-end-line="859" />
+            <state relative-caret-position="221">
+              <caret line="110" column="60" selection-start-line="110" selection-start-column="60" selection-end-line="110" selection-end-column="60" />
               <folding>
                 <element signature="e#172#235#0" expanded="true" />
               </folding>
@@ -30,7 +45,7 @@
         <entry file="file://$PROJECT_DIR$/practice.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+              <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -48,7 +63,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -178,14 +193,14 @@
     <entry file="file://$PROJECT_DIR$/practice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bank.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="859" lean-forward="true" selection-start-line="859" selection-end-line="859" />
+        <state relative-caret-position="221">
+          <caret line="110" column="60" selection-start-line="110" selection-start-column="60" selection-end-line="110" selection-end-column="60" />
           <folding>
             <element signature="e#172#235#0" expanded="true" />
           </folding>
