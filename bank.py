@@ -77,7 +77,7 @@ class Bank:
         self.root.geometry("700x600")
         self.root.minsize(200,200)
         self.root.wm_iconbitmap("static/icons/5.ico")
-        self.root.config(background="grey")
+        self.root.config(background="#FFDAB9")
         self.root.title("XYZ Bank")
         self.username = tk.StringVar()
         self.password = tk.StringVar()
@@ -104,32 +104,62 @@ class Bank:
     """  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX """
 
     def image_insert(self):
+        try:
 
-        self.image1 = Image.open("static/images/3.jpg")
-        self.photo1 = ImageTk.PhotoImage(self.image1)
+            self.image1 = Image.open("static/images/3.jpg")
+            self.photo1 = ImageTk.PhotoImage(self.image1)
 
-        self.image_label1 = tk.Label(self.root, image=self.photo1)
-        self.image_label1.pack(side='left', anchor='nw')
+            self.image_label1 = tk.Label(self.root, image=self.photo1)
+            self.image_label1.pack(side='left', anchor='nw')
 
-        self.image2 = Image.open("static/images/6.jpg")
-        self.photo2 = ImageTk.PhotoImage(self.image2)
+            self.image2 = Image.open("static/images/6.jpg")
+            self.photo2 = ImageTk.PhotoImage(self.image2)
 
-        self.image_label2 = tk.Label(self.root, image=self.photo2)
-        self.image_label2.place(x=400, y=400)
+            self.image_label2 = tk.Label(self.root, image=self.photo2)
+            self.image_label2.place(x=400, y=550)
 
-        self.image3 = Image.open("static/images/8.jpg")
-        self.photo3 = ImageTk.PhotoImage(self.image3)
+            self.image3 = Image.open("static/images/8.jpg")
+            self.photo3 = ImageTk.PhotoImage(self.image3)
 
-        self.image_label3 = tk.Label(self.root, image=self.photo3)
-        self.image_label3.place(x=400, y=0)
+            self.image_label3 = tk.Label(self.root, image=self.photo3)
+            self.image_label3.place(x=400, y=0)
+
+            self.image4 = Image.open("static/images/10.jpg")
+            self.photo4 = ImageTk.PhotoImage(self.image4)
+
+            self.image_label4 = tk.Label(self.root, image=self.photo4)
+            self.image_label4.place(x=1000, y=0)
+
+            self.image5 = Image.open("static/images/12.jpg")
+            self.photo5 = ImageTk.PhotoImage(self.image5)
+
+            self.image_label5 = tk.Label(self.root, image=self.photo5)
+            self.image_label5.place(x=800, y=400)
+
+            self.image6 = Image.open("static/images/14.jpg")
+            self.photo6 = ImageTk.PhotoImage(self.image6)
+
+            self.image_label6 = tk.Label(self.root, image=self.photo6)
+            self.image_label6.place(x=400, y=400)
+
+
+        except Exception as e:
+            tmsg.showerror('Error', e)
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
     def image_delete(self):
+        try:
 
-        self.image_label1.pack_forget()
-        self.image_label2.place_forget()
-        self.image_label3.place_forget()
+            self.image_label1.pack_forget()
+            self.image_label2.place_forget()
+            self.image_label3.place_forget()
+            self.image_label4.place_forget()
+            self.image_label5.place_forget()
+            self.image_label6.place_forget()
+
+        except Exceptionas e:
+            tmsg.showerror('Error',e)
 
 
 
@@ -141,16 +171,16 @@ class Bank:
 
             self.image_insert()
 
-            self.menu_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+            self.menu_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
             self.menu_frame.pack(side="top", pady=150)
 
-            self.menu_label = tk.Label(self.root, text="****By Rahul Charan****", bg='blue',
+            self.menu_label = tk.Label(self.root, text="****By Rahul Charan****", bg='#4169E1',
                                        font="times 25 italic")
             self.menu_label.pack(side='bottom', anchor='se')
 
 
 
-            self.menu_label1 = tk.Label(self.menu_frame, text="**Welcome To The XYZ Bank**", bg='blue', font="times 35 bold")
+            self.menu_label1 = tk.Label(self.menu_frame, text="**Welcome To The XYZ Bank**", bg='#FFA07A', font="times 35 bold")
             self.menu_label1.grid(row=0, column=0, padx=10, columnspan=3)
 
             self.menu_label2 = tk.Label(self.menu_frame, text="Username: ", font="times 20 bold")
@@ -165,10 +195,10 @@ class Bank:
             self.menu_entry2 = tk.Entry(self.menu_frame, textvariable=self.password, show='*')
             self.menu_entry2.grid(row=2, column=2)
 
-            self.menu_button1 = tk.Button(self.menu_frame, text='Login', fg='blue', command=self.login, font="times 15 bold")
+            self.menu_button1 = tk.Button(self.menu_frame, text='*Login*', fg='blue', command=self.login, font="times 15 bold")
             self.menu_button1.grid(row=3, column=1,pady=10, padx=10, columnspan=4 )
 
-            self.menu_button2 = tk.Button(self.menu_frame, text='Signup', fg='blue', command=self.signup, font="times 15 bold")
+            self.menu_button2 = tk.Button(self.menu_frame, text='*Signup*', fg='blue', command=self.signup, font="times 15 bold")
             self.menu_button2.grid(row=3, column=2, pady=10)
 
 
@@ -192,10 +222,10 @@ class Bank:
                     self.menu_frame.pack_forget()
 
 
-                    self.login_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+                    self.login_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
                     self.login_frame.pack(side="top", pady=150)
 
-                    self.login_label = tk.Label(self.login_frame, text=f"Welcome {data[1].title()} {data[2].title()} To The XYZ Bank", bg='red',font="times 35 bold")
+                    self.login_label = tk.Label(self.login_frame, text=f"Welcome {data[1].title()} {data[2].title()} To The XYZ Bank", bg='#FFA07A',font="times 35 bold")
                     self.login_label.grid(row=0, column=0, columnspan=3)
 
                     self.login_button1 = tk.Button(self.login_frame, text='Debit', fg='blue', command=self.debit,
@@ -215,7 +245,7 @@ class Bank:
                                                    font="times 15 bold")
                     self.login_button4.grid(row=3, column=1, pady=10)
 
-                    self.login_button5 = tk.Button(self.login_frame, text='Logout', fg='blue', command=self.logout,
+                    self.login_button5 = tk.Button(self.login_frame, text='*Logout*', fg='blue', command=self.logout,
                                                    font="times 15 bold")
                     self.login_button5.grid(row=4, column=0, pady=10, columnspan=2)
 
@@ -245,11 +275,11 @@ class Bank:
         try:
             self.login_frame.pack_forget()
 
-            self.debit_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+            self.debit_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
             self.debit_frame.pack(side="top", pady=150)
 
             self.debit_label = tk.Label(self.debit_frame,
-                                        text=f"Welcome {data[1].title()} {data[2].title()} To The XYZ Bank", bg='red',
+                                        text=f"Welcome {data[1].title()} {data[2].title()} To The XYZ Bank", bg='#FFA07A',
                                         font="times 35 bold")
             self.debit_label.grid(row=0, column=0, columnspan=3)
 
@@ -259,11 +289,11 @@ class Bank:
             self.debit_entry1 = tk.Entry(self.debit_frame, textvariable=self.amount)
             self.debit_entry1.grid(row=1, column=2)
 
-            self.debit_button1 = tk.Button(self.debit_frame, text='Submit', fg='blue', command=self.debit_submit,
+            self.debit_button1 = tk.Button(self.debit_frame, text='*Update*', fg='blue', command=self.debit_submit,
                                           font="times 15 bold")
             self.debit_button1.grid(row=3, column=2, pady=10, padx=10, columnspan=4)
 
-            self.debit_button2 = tk.Button(self.debit_frame, text='<<--Back', fg='blue', command=self.back_debit,
+            self.debit_button2 = tk.Button(self.debit_frame, text='<<<--Back', fg='blue', command=self.back_debit,
                                           font="times 15 bold")
             self.debit_button2.grid(row=3, column=0, pady=10, columnspan=1)
 
@@ -314,11 +344,11 @@ class Bank:
 
             self.login_frame.pack_forget()
 
-            self.credit_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+            self.credit_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
             self.credit_frame.pack(side="top", pady=150)
 
             self.credit_label = tk.Label(self.credit_frame,
-                                        text=f"Welcome {data[1].title()} {data[2].title()} To The XYZ Bank", bg='red',
+                                        text=f"Welcome {data[1].title()} {data[2].title()} To The XYZ Bank", bg='#FFA07A',
                                         font="times 35 bold")
             self.credit_label.grid(row=0, column=0, columnspan=3)
 
@@ -328,11 +358,11 @@ class Bank:
             self.credit_entry1 = tk.Entry(self.credit_frame, textvariable=self.amount)
             self.credit_entry1.grid(row=1, column=2)
 
-            self.credit_button1 = tk.Button(self.credit_frame, text='Submit', fg='blue', command=self.credit_submit,
+            self.credit_button1 = tk.Button(self.credit_frame, text='*Update*', fg='blue', command=self.credit_submit,
                                            font="times 15 bold")
             self.credit_button1.grid(row=3, column=2, pady=10, padx=10, columnspan=4)
 
-            self.credit_button2 = tk.Button(self.credit_frame, text='<<--Back', fg='blue', command=self.back_credit,
+            self.credit_button2 = tk.Button(self.credit_frame, text='<<<--Back', fg='blue', command=self.back_credit,
                                            font="times 15 bold")
             self.credit_button2.grid(row=3, column=0, pady=10, columnspan=1)
 
@@ -381,10 +411,10 @@ class Bank:
 
         self.login_frame.pack_forget()
 
-        self.profile_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+        self.profile_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
         self.profile_frame.pack(side="top", pady=100)
 
-        self.profile_label = tk.Label(self.profile_frame, text="***Your Profile Details***", bg='blue', font="times 30 bold")
+        self.profile_label = tk.Label(self.profile_frame, text="***Your Profile Details***", bg='#FFA07A', font="times 30 bold")
         self.profile_label.grid(row=0, column=0, padx=10, columnspan=3)
 
         self.profile_label1 = tk.Label(self.profile_frame, text="Username: ", font="times 20 bold")
@@ -423,7 +453,7 @@ class Bank:
         self.profile_label66 = tk.Label(self.profile_frame, text=f"{data[7]} ", font="times 20 bold")
         self.profile_label66.grid(row=6, column=1, padx=10, pady=10)
 
-        self.profile_button1 = tk.Button(self.profile_frame, text='<<--Back', fg='blue', command=self.back_profile,
+        self.profile_button1 = tk.Button(self.profile_frame, text='<<<--Back', fg='blue', command=self.back_profile,
                                         font="times 15 bold")
         self.profile_button1.grid(row=7, column=0)
 
@@ -475,11 +505,11 @@ class Bank:
             self.setting_label_detail.pack(side='top', pady=25)
 
 
-            self.setting_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+            self.setting_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
             self.setting_frame.pack(side="top", pady=150)
 
             self.setting_label = tk.Label(self.setting_frame,
-                                        text=f"**What Do You Want To Change**", bg='red',
+                                        text=f"**What Do You Want To Change**", bg='#FFA07A',
                                         font="times 30 bold")
             self.setting_label.grid(row=0, column=0, columnspan=3)
 
@@ -500,7 +530,7 @@ class Bank:
                                            font="times 15 bold")
             self.setting_button4.grid(row=3, column=1, pady=10)
 
-            self.setting_button5 = tk.Button(self.setting_frame, text='Back', fg='blue',
+            self.setting_button5 = tk.Button(self.setting_frame, text='<<--Back', fg='blue',
                                              command=self.setting_back,
                                              font="times 15 bold")
             self.setting_button5.grid(row=5, column=0, columnspan=2, pady=10)
@@ -516,7 +546,7 @@ class Bank:
 
         self.setting_frame.pack_forget()
 
-        self.setting_password_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+        self.setting_password_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
         self.setting_password_frame.pack(side="top", pady=150)
 
         self.setting_password_label1 = tk.Label(self.setting_password_frame, text=f"Old Password :--> ", font="times 20 bold")
@@ -539,12 +569,12 @@ class Bank:
         self.setting_password_entry3 = tk.Entry(self.setting_password_frame, textvariable=self.verify_new_password, show='*')
         self.setting_password_entry3.grid(row=3, column=1)
 
-        self.setting_password_button5 = tk.Button(self.setting_password_frame, text='Back', fg='blue',
+        self.setting_password_button5 = tk.Button(self.setting_password_frame, text='<<<--Back', fg='blue',
                                          command=self.setting_password_back,
                                          font="times 15 bold")
         self.setting_password_button5.grid(row=4, column=0, columnspan=2, pady=10)
 
-        self.setting_password_button5 = tk.Button(self.setting_password_frame, text='Update', fg='blue',
+        self.setting_password_button5 = tk.Button(self.setting_password_frame, text='*Update*', fg='blue',
                                                   command=self.setting_password_update,
                                                   font="times 15 bold")
         self.setting_password_button5.grid(row=4, column=2, columnspan=2, pady=10)
@@ -597,7 +627,7 @@ class Bank:
 
         self.setting_frame.pack_forget()
 
-        self.setting_name_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+        self.setting_name_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
         self.setting_name_frame.pack(side="top", pady=150)
 
         self.setting_name_label1 = tk.Label(self.setting_name_frame, text=f"First Name :--> ",
@@ -614,12 +644,12 @@ class Bank:
         self.setting_name_entry2 = tk.Entry(self.setting_name_frame, textvariable=self.new_last_name)
         self.setting_name_entry2.grid(row=2, column=1)
 
-        self.setting_name_button5 = tk.Button(self.setting_name_frame, text='Back', fg='blue',
+        self.setting_name_button5 = tk.Button(self.setting_name_frame, text='<<<--Back', fg='blue',
                                                   command=self.setting_name_back,
                                                   font="times 15 bold")
         self.setting_name_button5.grid(row=3, column=0,  pady=10)
 
-        self.setting_name_button5 = tk.Button(self.setting_name_frame, text='Update', fg='blue',
+        self.setting_name_button5 = tk.Button(self.setting_name_frame, text='*Update*', fg='blue',
                                               command=self.setting_name_update,
                                               font="times 15 bold")
         self.setting_name_button5.grid(row=3, column=1, columnspan=2, pady=10)
@@ -662,7 +692,7 @@ class Bank:
 
         self.setting_frame.pack_forget()
 
-        self.setting_email_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+        self.setting_email_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
         self.setting_email_frame.pack(side="top", pady=150)
 
         self.setting_email_label1 = tk.Label(self.setting_email_frame, text=f"Enter New Email :--> ",
@@ -673,12 +703,12 @@ class Bank:
         self.setting_email_entry1.grid(row=1, column=1)
 
 
-        self.setting_email_button5 = tk.Button(self.setting_email_frame, text='Back', fg='blue',
+        self.setting_email_button5 = tk.Button(self.setting_email_frame, text='<<<--Back', fg='blue',
                                               command=self.setting_email_back,
                                               font="times 15 bold")
         self.setting_email_button5.grid(row=3, column=0, pady=10)
 
-        self.setting_email_button5 = tk.Button(self.setting_email_frame, text='Update', fg='blue',
+        self.setting_email_button5 = tk.Button(self.setting_email_frame, text='*Update*', fg='blue',
                                               command=self.setting_email_update,
                                               font="times 15 bold")
         self.setting_email_button5.grid(row=3, column=1, columnspan=2, pady=10)
@@ -717,7 +747,7 @@ class Bank:
 
         self.setting_frame.pack_forget()
 
-        self.setting_phone_number_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+        self.setting_phone_number_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
         self.setting_phone_number_frame.pack(side="top", pady=150)
 
         self.setting_phone_number_label1 = tk.Label(self.setting_phone_number_frame, text=f"Enter New Phone Number :--> ",
@@ -727,12 +757,12 @@ class Bank:
         self.setting_phone_number_entry1 = tk.Entry(self.setting_phone_number_frame, textvariable=self.new_phone_number)
         self.setting_phone_number_entry1.grid(row=1, column=1)
 
-        self.setting_phone_number_button5 = tk.Button(self.setting_phone_number_frame, text='Back', fg='blue',
+        self.setting_phone_number_button5 = tk.Button(self.setting_phone_number_frame, text='<<<--Back', fg='blue',
                                                command=self.setting_phone_number_back,
                                                font="times 15 bold")
         self.setting_phone_number_button5.grid(row=3, column=0, pady=10)
 
-        self.setting_phone_number_button5 = tk.Button(self.setting_phone_number_frame, text='Update', fg='blue',
+        self.setting_phone_number_button5 = tk.Button(self.setting_phone_number_frame, text='*Update*', fg='blue',
                                                command=self.setting_phone_number_update,
                                                font="times 15 bold")
         self.setting_phone_number_button5.grid(row=3, column=1, columnspan=2, pady=10)
@@ -792,10 +822,10 @@ class Bank:
 
         self.menu_frame.pack_forget()
 
-        self.signup_frame = tk.Frame(self.root, bg='lightblue', relief='sunken', borderwidth=9)
+        self.signup_frame = tk.Frame(self.root, bg='#FAF0E6', relief='sunken', borderwidth=9)
         self.signup_frame.pack(side="top", pady=50)
 
-        self.signup_label1 = tk.Label(self.signup_frame, text="***Enter Your Details To Signup ***", bg='blue', font="times 35 bold")
+        self.signup_label1 = tk.Label(self.signup_frame, text="***Enter Your Details To Signup ***", bg='#FFA07A', font="times 35 bold")
         self.signup_label1.grid(row=0, column=0, padx=10, columnspan=3)
 
         ask_list = ['Username', 'First Name', 'Last Name', 'Password', 'Verify Password', 'Email', 'Phone Number']
@@ -825,11 +855,11 @@ class Bank:
         self.signup_entry1 = tk.Entry(self.signup_frame, textvariable=self.phone_number)
         self.signup_entry1.grid(row=7, column=2)
 
-        self.signup_button1 = tk.Button(self.signup_frame, text='Login', fg='blue', command=self.signup_login,
+        self.signup_button1 = tk.Button(self.signup_frame, text='*Login*', fg='blue', command=self.signup_login,
                                       font="times 15 bold")
         self.signup_button1.grid(row=9, column=1, pady=20, padx=10,columnspan=3)
 
-        self.signup_button2 = tk.Button(self.signup_frame, text='Submit', fg='blue', command=self.signup_submit,
+        self.signup_button2 = tk.Button(self.signup_frame, text='*Signup*', fg='blue', command=self.signup_submit,
                                       font="times 15 bold")
         self.signup_button2.grid(row=9, column=2, pady=20)
 
