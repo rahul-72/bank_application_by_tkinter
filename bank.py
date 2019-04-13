@@ -158,7 +158,7 @@ class Bank:
             self.image_label5.place_forget()
             self.image_label6.place_forget()
 
-        except Exceptionas e:
+        except Exception as e:
             tmsg.showerror('Error',e)
 
 
@@ -604,26 +604,30 @@ class Bank:
         try:
 
             if self.password.get() == self.old_password.get():
-                if self.new_password.get() == self.verify_new_password.get():
-                    cmd1 = f"update xyz set password='{self.new_password.get()}' where username='{self.username.get()}'"
-                    db_execute_fetch(cmd1)
+                if self.new_password.get():
+                    if self.new_password.get() == self.verify_new_password.get():
+                        cmd1 = f"update xyz set password='{self.new_password.get()}' where username='{self.username.get()}'"
+                        db_execute_fetch(cmd1)
 
-                    tmsg.showinfo('Setting', 'Message--->>> Your Password Is Updated Successfully.....')
+                        tmsg.showinfo('Setting', 'Message--->>> Your Password Is Updated Successfully.....')
 
-                    self.setting_password_frame.pack_forget()
-                    self.password.set('')
-                    self.old_password.set('')
-                    self.new_password.set('')
-                    self.verify_new_password.set('')
+                        self.setting_password_frame.pack_forget()
+                        self.password.set('')
+                        self.old_password.set('')
+                        self.new_password.set('')
+                        self.verify_new_password.set('')
 
-                    self.setting_label_detail.pack_forget()
-                    self.image_delete()
+                        self.setting_label_detail.pack_forget()
+                        self.image_delete()
 
-                    self.menu()
+                        self.menu()
+
+                    else:
+                        tmsg.showwarning('Setting', 'Warning--->>> Password Verification is Failed..Please Enter Correct Password...')
+
 
                 else:
-                    tmsg.showwarning('Setting', 'Warning--->>> Password Verification is Failed..Please Enter Correct Password...')
-
+                    tmsg.showwarning('Warning', 'Warning--->>>   Please Enter New Password.......')
 
             else:
                 tmsg.showwarning('Setting', 'Warning-->>> Your Old Password Does Not Match...Please Enter Correct Password....')
@@ -684,29 +688,33 @@ class Bank:
     def setting_name_update(self):
 
         try:
+            if self.new_first_name.get():
 
-            cmd1 = f"update xyz set first_name='{self.new_first_name.get()}' where username='{self.username.get()}'"
-            db_execute_fetch(cmd1)
+                cmd1 = f"update xyz set first_name='{self.new_first_name.get()}' where username='{self.username.get()}'"
+                db_execute_fetch(cmd1)
 
-            cmd2 = f"update xyz set last_name='{self.new_last_name.get()}' where username='{self.username.get()}'"
-            db_execute_fetch(cmd2)
+                cmd2 = f"update xyz set last_name='{self.new_last_name.get()}' where username='{self.username.get()}'"
+                db_execute_fetch(cmd2)
 
 
 
-            tmsg.showinfo('Setting', f'Message--->>> Your Name Is Updated Successfully...Your New Name Is-->>  {self.new_first_name.get().title()} {self.new_last_name.get().title()}.....')
+                tmsg.showinfo('Setting', f'Message--->>> Your Name Is Updated Successfully...Your New Name Is-->>  {self.new_first_name.get().title()} {self.new_last_name.get().title()}.....')
 
-            self.setting_name_frame.pack_forget()
+                self.setting_name_frame.pack_forget()
 
-            self.new_first_name.set('')
-            self.new_last_name.set('')
+                self.new_first_name.set('')
+                self.new_last_name.set('')
 
-            self.setting_label_detail.pack_forget()
+                self.setting_label_detail.pack_forget()
 
-            self.setting()
+                self.setting()
 
+
+            else:
+                tmsg.showwarning('Warning', 'Warning--->>>>  First Name Is Mandatory.........')
 
         except Exception as e:
-            tmsg.showwarning('Warning', 'Warning--->>>  Please Fill All The Details.........')
+            tmsg.showerror('Error', e)
 
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
@@ -752,24 +760,29 @@ class Bank:
 
     def setting_email_update(self):
         try:
+            if self.new_email.get():
 
-            cmd1 = f"update xyz set email='{self.new_email.get()}' where username='{self.username.get()}'"
-            db_execute_fetch(cmd1)
+                cmd1 = f"update xyz set email='{self.new_email.get()}' where username='{self.username.get()}'"
+                db_execute_fetch(cmd1)
 
 
-            tmsg.showinfo('Setting', f'Message--->>> Your Email Is Updated Successfully...Your New Email Is -> {self.new_email.get()}.......')
+                tmsg.showinfo('Setting', f'Message--->>> Your Email Is Updated Successfully...Your New Email Is -> {self.new_email.get()}.......')
 
-            self.setting_email_frame.pack_forget()
+                self.setting_email_frame.pack_forget()
 
-            self.new_email.set('')
+                self.new_email.set('')
 
-            self.setting_label_detail.pack_forget()
+                self.setting_label_detail.pack_forget()
 
-            self.setting()
+                self.setting()
+
+
+            else:
+                tmsg.showwarning('Warning', 'Warning--->>>  Please Enter Your New Email........')
 
 
         except Exception as e:
-            tmsg.showwarning('Warning', 'Warning--->>>  Please Fill All The Details.........')
+            tmsg.showerror('Error', f'Error__>>>   {e}')
 
 
     """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
@@ -928,66 +941,87 @@ class Bank:
 
         try:
 
-            cmd = f"select * from xyz where username='{self.username.get()}'"
-            db_connection()
-            db_execute_fetch(cmd)
+            if self.username.get():
+                if self.first_name.get():
+                    if self.password.get():
+                        if self.email.get():
+                            if self.phone_number.get():
+                                cmd = f"select * from xyz where username='{self.username.get()}'"
+                                db_connection()
+                                db_execute_fetch(cmd)
 
-            if not data:
-                if self.password.get() == self.verify_password.get():
+                                if not data:
+                                    if self.password.get() == self.verify_password.get():
 
-                    while True:
-                        q, w, e, r, t, y, u, i, o, p, l = map(str, [randint(0, 9) for i in range(11)])
-                        """Assigning 11 random number to update
-                        account-number in database."""
-                        a = q + w + e + r + t + y + u + i + o + p + l
+                                        while True:
+                                            q, w, e, r, t, y, u, i, o, p, l = map(str, [randint(0, 9) for i in range(11)])
+                                            """Assigning 11 random number to update
+                                            account-number in database."""
+                                            a = q + w + e + r + t + y + u + i + o + p + l
 
-                        cmd1 = "select * from xyz where account_number='{a}'"
-                        # Here I am not database' functions which I created above.
-                        cursor.execute(cmd1)
-                        data1 = cursor.fetchall()
-                        if data1:
-                            """checking whether a randomly generated account number is already
-                            in bank databse or not."""
-                            continue
+                                            cmd1 = "select * from xyz where account_number='{a}'"
+                                            # Here I am not database' functions which I created above.
+                                            cursor.execute(cmd1)
+                                            data1 = cursor.fetchall()
+                                            if data1:
+                                                """checking whether a randomly generated account number is already
+                                                in bank databse or not."""
+                                                continue
+                                            else:
+                                                break
+
+
+
+                                        if len(self.phone_number.get()) == 10:
+                                            try:
+
+                                                int_phone_number = int(self.phone_number.get())
+                                                cmd2 = f"insert into xyz values('{self.username.get()}','{self.first_name.get()}','{self.last_name.get()}',0,'{a}','{self.password.get()}','{self.email.get()}','{int_phone_number}')"
+                                                db_execute_insert(cmd2)
+                                                db_close()
+
+                                                tmsg.showinfo('Signup', f'Hello {self.first_name.get().title()} {self.last_name.get().title()}...Account Is Successfully Created With Initial Balance Of  Rs 0  ...Your Account Number is -->> {a}.......... Enjoy The Services Of XYZ Bank....Have A Nice Day...')
+
+
+                                                self.username.set('')
+                                                self.phone_number.set('')
+                                                self.first_name.set('')
+                                                self.last_name.set('')
+                                                self.password.set('')
+                                                self.verify_password.set('')
+                                                self.email.set('')
+
+
+                                                self.signup_login()
+
+                                            except Exception as e:
+                                                tmsg.showwarning('Signup', 'Warning-->>>  Enter Only Digits.....')
+
+                                        else:
+                                            tmsg.showwarning('Signup', 'Warning--->>>  Enter Only 10 Digits Phone Number..... ')
+
+                                    else:
+                                        tmsg.showwarning("Signup", "Warning-->>>>  Password Verification is Failed....Please Verify Your Password Again")
+
+                                else:
+                                    tmsg.showinfo("Signup", "Sorry---->>>>>   Username has been Already Taken...Please Choose Another Username..")
+
+
+                            else:
+                                tmsg.showwarning('Warning', 'Warning--->>>  Phone Number Is Mandatory.............')
+
+
                         else:
-                            break
-
-
-
-                    if len(self.phone_number.get()) == 10:
-                        try:
-
-                            int_phone_number = int(self.phone_number.get())
-                            cmd2 = f"insert into xyz values('{self.username.get()}','{self.first_name.get()}','{self.last_name.get()}',0,'{a}','{self.password.get()}','{self.email.get()}','{int_phone_number}')"
-                            db_execute_insert(cmd2)
-                            db_close()
-
-                            tmsg.showinfo('Signup', f'Hello {self.first_name.get().title()} {self.last_name.get().title()}...Account Is Successfully Created With Initial Balance Of  Rs 0  ...Your Account Number is -->> {a}.......... Enjoy The Services Of XYZ Bank....Have A Nice Day...')
-
-
-                            self.username.set('')
-                            self.phone_number.set('')
-                            self.first_name.set('')
-                            self.last_name.set('')
-                            self.password.set('')
-                            self.verify_password.set('')
-                            self.email.set('')
-
-
-                            self.signup_login()
-
-                        except Exception as e:
-                            tmsg.showwarning('Signup', 'Warning-->>>  Enter Only Digits.....')
+                            tmsg.showwarning('Warning', 'Warning--->>>   Email Is Mandatory..........')
 
                     else:
-                        tmsg.showwarning('Signup', 'Warning--->>>  Enter Only 10 Digits Phone Number..... ')
+                        tmsg.showwarning('Warning', 'Warning--->>>   Password Is Mandatory..........')
 
                 else:
-                    tmsg.showwarning("Signup", "Warning-->>>>  Password Verification is Failed....Please Verify Your Password Again")
+                    tmsg.showwarning('Warnng', 'Warning-->>>  First Name Is Mandatory..........')
 
             else:
-                tmsg.showinfo("Signup", "Sorry---->>>>>   Username has been Already Taken...Please Choose Another Username..")
-
+                tmsg.showwarning('Warning', 'warning--->>>  Username Is Mandatory........')
 
 
         except Exception as e:

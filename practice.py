@@ -1,12 +1,17 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 root = tk.Tk()
+q = tk.StringVar()
 
-image = Image.open("static/images/1.jpg")
-photo = ImageTk.PhotoImage(image)
+def hello():
+    print(q.get())
+    if q.get():
+        print('hi')
 
-label = tk.Label(root, image=photo)
-label.pack()
+    else:
+        print('hello')
+entry = tk.Entry(root, textvariable=q).pack()
+button = tk.Button(root, text='submit', command=hello).pack()
 
 
 root.mainloop()
